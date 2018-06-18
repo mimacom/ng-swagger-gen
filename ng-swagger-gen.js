@@ -1004,7 +1004,8 @@ function processServices(swagger, models, options) {
         operation.operationIsString ||
         operation.operationIsNumber ||
         operation.operationIsBoolean ||
-        operation.operationIsEnum ?
+        (operation.operationIsEnum && !(resultType.toString().includes('Array<') ||
+          resultType.toString().includes('[]'))) ?
           'text' : 'json';
       operation.operationIsUnknown = !(
         operation.operationIsVoid ||
